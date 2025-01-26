@@ -36,7 +36,7 @@ const questionare = [
     ]
   },
   {
-    id: 'potency_preference',
+    id: 'consumption_preference',
     question: "Do you have a preference for how you consume cannabis? (Select all that apply) ",
     type:'checkbox',
     answers: [
@@ -49,9 +49,9 @@ const questionare = [
     ]
   },
   {
-    id: 'experience',
+    id: 'effect_speed',
     question: "Do you want something that works quickly, like a vape, or something that takes longer to work, like a gummy or cookie?",
-    type:'checkbox',
+    type:'radio',
     answers: [
       "Fast Acting",
       "Works Slowly but Lasts Longer",
@@ -59,7 +59,7 @@ const questionare = [
     ]
   },
   {
-    id: 'reasons',
+    id: 'usage_reason',
     question: "What are your primary reasons for using cannabis? (Select all that apply)",
     type:'checkbox',
     answers: [
@@ -73,7 +73,7 @@ const questionare = [
     ]
   },    
   {
-    id: 'consumption',
+    id: 'usage_time',
     question: "When do you typically consume cannabis? (Select all that apply)",
     type:'checkbox',
     answers: [
@@ -84,7 +84,7 @@ const questionare = [
     ]
   },
   {
-    id: 'effects',
+    id: 'effect_avoid',
     question: "Are there specific things you want to avoid in your cannabis experience? (select all that apply)",
     type:'checkbox',
     answers: [
@@ -94,7 +94,7 @@ const questionare = [
     ]
   },
   {
-    id: 'flavor',
+    id: 'flavor_preference',
     question: "Do you have a preference for certain flavors or aromas? (Select all that apply)",
     type:'checkbox',
     answers: [
@@ -122,10 +122,10 @@ interface FormData {
   first_name:string,
   last_name:string,
   potency_preference:string,
-  experience: string[],
+  experience: string,
   sensitivity: string[],
   consumption_preference: string[],
-  effect_speed: string[],
+  effect_speed: string,
   usage_reason: string[],
   usage_time: string[],
   effect_avoid: string[],
@@ -138,6 +138,15 @@ interface QuestionItem {
   type: string,
   answers: string[]
 }
+
+// const StepIntro: React.FC<StepProps> = () => {
+//   // Example handler for changing a form value
+//   return (
+//     <div className='w-auto flex justify-left ml-4'>
+//       get fucked
+//     </div>
+//   );
+// };
 
 const Step1: React.FC<StepProps> = ({ formData, handleChange }) => {
   // Example handler for changing a form value
@@ -211,13 +220,13 @@ const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState<number>(0);
   const [formData, setFormData] = useState<FormData>({
     email: '',
-    first_name:'',
-    last_name:'',
-    potency_preference:'',
-    experience: [],
+    first_name: '',
+    last_name: '',
+    potency_preference: '',
+    experience: '',
     sensitivity: [],
     consumption_preference: [],
-    effect_speed: [],
+    effect_speed: '',
     usage_reason: [],
     usage_time: [],
     effect_avoid: [],
@@ -236,19 +245,22 @@ const MultiStepForm: React.FC = () => {
   const validateInput = (): boolean => {
     let currErr: string = "";
     //check email
-    if (step === 0) {
+    if (step === 1) {
       const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[cC][oO][mM]$/;
       if(!regex.test(formData.email)) {
         currErr = 'Please use a valid email ending in ".com"';
       }
     }
-    if (step === 1) {
+    if (step === 2) {
       if (formData.first_name.length == 0) {
         currErr = "Please enter a first name"
       }
     }
-    if (step >= 2) {
+    if (step >= 3) {
       const question = questionare[step - 2];
+      console.log(question)
+      console.log(formData)
+      console.log(formData[question.id])
       if (question.type === 'radio' && !formData[question.id]) {
         currErr =`Please select an option`;
       }
@@ -290,7 +302,10 @@ const MultiStepForm: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Submitting: ', formData);
+    const err = validateInput();
+    if (!err) {
+      console.log('Submitting: ', formData);
+    }
     // Add your submission logic here
   };
 
