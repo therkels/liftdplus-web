@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent} from 'react';
+import axios from 'axios';
 import MultiFormItem from './multiFormItem';
 
 
@@ -327,12 +328,25 @@ const MultiStepForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async(event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     const err = validateInput();
     if (!err) {
-      console.log('Submitting: ', formData);
+      try{
+        const response = await axios.post('https://therkels.pythonanywhere.com/survey', formData, {
+          headers: {
+            'Content-Type': 'application/json',
+            'X-API-KEY': '956ceb02554bc695fd88fd21450b4d5c2e3d9d820e116075e243405b873b6f0a'
+          },
+        });
+        console.log(response);
+        console.log(response.data);
+        setStep(0);
+      }
+      catch (e){
+        console.error('Error:', e)
+      }
     }
-    // Add your submission logic here
   };
 
   const steps = [
