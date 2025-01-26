@@ -328,8 +328,7 @@ const MultiStepForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = async(event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
+  const handleSubmit = async() => {
     const err = validateInput();
     if (!err) {
       try{
