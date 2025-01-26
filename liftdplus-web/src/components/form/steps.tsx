@@ -139,14 +139,35 @@ interface QuestionItem {
   answers: string[]
 }
 
-// const StepIntro: React.FC<StepProps> = () => {
-//   // Example handler for changing a form value
-//   return (
-//     <div className='w-auto flex justify-left ml-4'>
-//       get fucked
-//     </div>
-//   );
-// };
+const StepIntro = () => {
+  // Example handler for changing a form value
+  return (
+    <div className='w-auto m-3 pt-4'>
+      <div className="text-lg font-semibold">
+        <p>Curated Cannabis Recommendations Await</p>
+      </div>
+      <div>
+        <p>Welcome!<br/><br/></p>
+        <p>
+          We’re here to make choosing cannabis products easy and fun. By answering just a few quick questions, 
+          we’ll suggest products that fit what you like and need. It doesn’t matter if you’ve used cannabis before 
+          or are trying it for the first time – we’re here to help you find the right products for your lifestyle.
+          <br/><br/>
+        </p>
+        <p>
+        Important Note:<br/>
+        We’re testing our idea right now, so everything you share is private and safe. 
+        Your information will only be used for testing our recommendation tool and will not be shared or sold to anyone, 
+        including dispensaries or partners.
+        </p>
+        <p>
+        To learn more, visit our website FAQ page or check out the privacy rules we follow for Zoho (our survey) and Squarespace (our website).
+        Ready to get started? Let’s go!
+        </p>
+      </div>
+    </div>
+  );
+};
 
 const Step1: React.FC<StepProps> = ({ formData, handleChange }) => {
   // Example handler for changing a form value
@@ -171,34 +192,42 @@ const Step1: React.FC<StepProps> = ({ formData, handleChange }) => {
 
 const Step2: React.FC<StepProps> = ({ formData, handleChange }) => {
   return (
-    <div className='w-auto flex justify-left ml-4'>
+    <div className='
+      w-auto flex flex-col items-center p-4
+      md:flex-row md:justify-left md:space-x-3
+    '>
       <div className='flex flex-col'>
-          <label className='text-xl mb-2 p-3'>
-          <div className='flex flex-row'><p className='text-red-600'>*</p><p>First Name:</p></div>
+        <label className='text-xl mb-2 p-3'>
+          <div className='flex flex-row'>
+            <p className='text-red-600'>*</p>
+            <p>First Name:</p>
+          </div>
           <input
-          className='border border-black p-1'
-          type="name"
-          id="first_name"
-          name="first_name"
-          value={formData.first_name}
-          onChange={handleChange}
+            className='border border-black p-1'
+            type="text"
+            id="first_name"
+            name="first_name"
+            value={formData.first_name}
+            onChange={handleChange}
           />
-          </label>
+        </label>
       </div>
       <div className='flex flex-col'>
-          <label className='text-xl mb-2 p-3'>
-          <div className='flex flex-row'><p>Last Name</p></div>
+        <label className='text-xl mb-2 p-3'>
+          <div className='flex flex-row'>
+            <p>Last Name</p>
+          </div>
           <input
-          className='border border-black p-1'
-          type="name"
-          id="last_name"
-          name="last_name"
-          value={formData.last_name}
-          onChange={handleChange}
+            className='border border-black p-1'
+            type="text"
+            id="last_name"
+            name="last_name"
+            value={formData.last_name}
+            onChange={handleChange}
           />
-          </label>
+        </label>
       </div>
-  </div>
+    </div>
 
   );
 };
@@ -257,10 +286,7 @@ const MultiStepForm: React.FC = () => {
       }
     }
     if (step >= 3) {
-      const question = questionare[step - 2];
-      console.log(question)
-      console.log(formData)
-      console.log(formData[question.id])
+      const question = questionare[step - 3];
       if (question.type === 'radio' && !formData[question.id]) {
         currErr =`Please select an option`;
       }
@@ -310,6 +336,7 @@ const MultiStepForm: React.FC = () => {
   };
 
   const steps = [
+    <StepIntro key="s0"/>,
     <Step1 key="s1" formData={formData} handleChange={handleChange} />,
     <Step2 key="s2" formData={formData} handleChange={handleChange} />,
   ];
@@ -328,6 +355,9 @@ const MultiStepForm: React.FC = () => {
 
   return (
     <div className='bg-white'>
+      <div className='text-right p-3'>
+        <p>Step {step} of {steps.length}</p>
+      </div>
       {steps[step]}
       {err ? <p className='text-red-500 pl-7'>{err}</p> : <></>}
       <div className='flex justify-center'>
