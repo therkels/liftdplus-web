@@ -1,21 +1,5 @@
 import { ChangeEvent } from 'react';
-
-interface FormData {
-  [key: string]: string | string[],
-  email: string,
-  first_name:string,
-  last_name:string,
-  potency_preference:string,
-  experience: string,
-  sensitivity: string[],
-  consumption_preference: string[],
-  effect_speed: string,
-  usage_reason: string[],
-  usage_time: string[],
-  effect_avoid: string[],
-  flavor_preference: string[]
-
-}
+import { FormData } from './types';
 
 interface MultiFormItemProps {
   handleOptionChange: (event: ChangeEvent<HTMLInputElement>) => void;

@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent} from 'react';
 import axios from 'axios';
 import MultiFormItem from './multiFormItem';
-
+import {StepProps, StepQuestionProps, FormData} from './types';
+import SingleInput from './singleInput';
 
 const questionare = [
   {
@@ -107,38 +108,6 @@ const questionare = [
   }
 ];
 
-interface StepProps {
-  formData: FormData;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-interface StepQuestionProps {
-  questionItem: QuestionItem;
-  formData: FormData;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-interface FormData {
-  [key: string]: string | string[],
-  email: string,
-  first_name:string,
-  last_name:string,
-  potency_preference:string,
-  experience: string,
-  sensitivity: string[],
-  consumption_preference: string[],
-  effect_speed: string,
-  usage_reason: string[],
-  usage_time: string[],
-  effect_avoid: string[],
-  flavor_preference: string[]
-
-}
-interface QuestionItem {
-  id: string,
-  question: string,
-  type: string,
-  answers: string[]
-}
 
 const StepIntro = () => {
   // Example handler for changing a form value
@@ -173,21 +142,14 @@ const StepIntro = () => {
 const Step1: React.FC<StepProps> = ({ formData, handleChange }) => {
   // Example handler for changing a form value
   return (
-    <div className='w-auto flex justify-left ml-4'>
-      <label className='text-xl mb-2 p-3'>
-        <div className='flex flex-row'><p className='text-red-600'>*</p><p>Email:</p></div>
-        <input
-        className='border border-black p-1'
-        type="email"
-        id="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        style={{ display: 'block', width: '100%', padding: '8px', marginTop: '4px' }}
-        required
-        />
-      </label>
-    </div>
+    <SingleInput 
+    handleChange={handleChange} 
+    formData={formData} 
+    label='email' 
+    labelId='email'
+    field='email'
+    type ='email'
+    required={true}/>
   );
 };
 
@@ -198,35 +160,24 @@ const Step2: React.FC<StepProps> = ({ formData, handleChange }) => {
       md:flex-row md:justify-left md:space-x-3
     '>
       <div className='flex flex-col'>
-        <label className='text-xl mb-2 p-3'>
-          <div className='flex flex-row'>
-            <p className='text-red-600'>*</p>
-            <p>First Name:</p>
-          </div>
-          <input
-            className='border border-black p-1'
-            type="text"
-            id="first_name"
-            name="first_name"
-            value={formData.first_name}
-            onChange={handleChange}
-          />
-        </label>
+        <SingleInput 
+          handleChange={handleChange} 
+          formData={formData} 
+          label='First Name' 
+          labelId='first_name'
+          field='first_name'
+          type='text'
+          required={true}/>
       </div>
       <div className='flex flex-col'>
-        <label className='text-xl mb-2 p-3'>
-          <div className='flex flex-row'>
-            <p>Last Name</p>
-          </div>
-          <input
-            className='border border-black p-1'
-            type="text"
-            id="last_name"
-            name="last_name"
-            value={formData.last_name}
-            onChange={handleChange}
-          />
-        </label>
+      <SingleInput 
+          handleChange={handleChange} 
+          formData={formData} 
+          label='Last Name' 
+          labelId='last_name'
+          field='last_name'
+          type='text'
+          required={true}/>
       </div>
     </div>
 
@@ -266,10 +217,12 @@ const MultiStepForm: React.FC = () => {
 
   const handleChange =(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const {name, value} = e.target;
+      console.log(name, value)
       setFormData((prevData) => ({
           ...prevData,
           [name]: value
       }));
+      console.log(formData)
   };
 
   const validateInput = (): boolean => {
@@ -332,14 +285,12 @@ const MultiStepForm: React.FC = () => {
     const err = validateInput();
     if (!err) {
       try{
-        const response = await axios.post('https://therkels.pythonanywhere.com/survey', formData, {
+        await axios.post('https://therkels.pythonanywhere.com/survey', formData, {
           headers: {
             'Content-Type': 'application/json',
             'X-API-KEY': '956ceb02554bc695fd88fd21450b4d5c2e3d9d820e116075e243405b873b6f0a'
           },
         });
-        console.log(response);
-        console.log(response.data);
         setStep(0);
       }
       catch (e){
