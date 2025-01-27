@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent} from 'react';
+import Link from 'next/link';
 import axios from 'axios';
 import MultiFormItem from './multiFormItem';
 import {StepProps, StepQuestionProps, FormData} from './types';
@@ -177,7 +178,7 @@ const Step2: React.FC<StepProps> = ({ formData, handleChange }) => {
           labelId='last_name'
           field='last_name'
           type='text'
-          required={true}/>
+          required={false}/>
       </div>
     </div>
 
@@ -194,6 +195,17 @@ const StepQuestion: React.FC<StepQuestionProps> = ({ questionItem, formData, han
     answers={questionItem.answers}
     type={questionItem.type}
     />
+  );
+};
+
+const StepOutro = () => {
+  // Example handler for changing a form value
+  return (
+    <div className='w-auto m-3 pt-4'>
+      <p>
+        Thank you for participating in our survey! What’s next? Within 2 days, you’ll receive your personalized recommendations via email. Keep an eye out for an email from info@cannabizstart-up.com, and don’t forget to check your spam folder just in case!
+      </p>
+    </div>
   );
 };
 
@@ -287,15 +299,16 @@ const MultiStepForm: React.FC = () => {
       try{
         await axios.post('https://therkels.pythonanywhere.com/survey', formData, {
           headers: {
-            'Content-Type': 'application/json',
-            'X-API-KEY': '956ceb02554bc695fd88fd21450b4d5c2e3d9d820e116075e243405b873b6f0a'
+            'Content-Type': 'application/json'
           },
         });
-        setStep(0);
+        nextStep();
       }
       catch (e){
         console.error('Error:', e)
       }
+      console.log('here')
+      nextStep();
     }
   };
 
@@ -309,7 +322,7 @@ const MultiStepForm: React.FC = () => {
   const nextStep = () =>  {
     const err = validateInput();
     if (!err) {
-      setStep((prev) => Math.min(prev + 1, steps.length - 1));
+      setStep((prev) => Math.min(prev + 1, steps.length));
     }
   }
   const prevStep = () => {
@@ -319,7 +332,9 @@ const MultiStepForm: React.FC = () => {
 
   return (
     <div className='bg-white'>
-      <div className='text-right p-3'>
+      {steps.length !== step?
+      <>
+        <div className='text-right p-3'>
         <p>Step {step} of {steps.length}</p>
       </div>
       {steps[step]}
@@ -349,6 +364,19 @@ const MultiStepForm: React.FC = () => {
           </button>
         )}
       </div>
+      </>:
+      <>
+      <StepOutro/>
+      <div className='flex justify-center'>
+        <Link 
+        href="/" 
+        className="inline-block px-4 py-2 m-3 font-bold text-white bg-rose-500"
+        >
+          Return Home
+        </Link>
+      </div>
+      </>
+      }
     </div>
   );
 };
