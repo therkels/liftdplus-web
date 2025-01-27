@@ -297,6 +297,7 @@ const MultiStepForm: React.FC = () => {
     const err = validateInput();
     if (!err) {
       try{
+        //post
         await axios.post('https://therkels.pythonanywhere.com/survey/submit', formData, {
           headers: {
             'Content-Type': 'application/json'
