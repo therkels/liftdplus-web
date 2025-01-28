@@ -16,8 +16,8 @@ export default function NavBar() {
           </Link>
         </li>
         <li className="mr-6">
-          <Link href="/contact" className="text-primaryText">
-            Contact
+          <Link href="/FAQ" className="text-primaryText">
+            FAQ
           </Link>
         </li>
       </ul>
