@@ -4,10 +4,11 @@ import MultiStepForm from '@/components/form/steps';
 export default function Home() {
     return (
         <div className="
-        bg-slate-700 
+        bg-primaryBlue
         text-secondaryText
-        mx-auto
-        p-4
+        pt-20
+        px-5
+        md:h-screen
         ">
             <MultiStepForm></MultiStepForm>
         </div>

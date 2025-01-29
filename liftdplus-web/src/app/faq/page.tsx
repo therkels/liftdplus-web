@@ -56,15 +56,15 @@ const contents = [
 export default function Home() {
     return (
       <>
-      <div className='bg-primaryBlue space-y-5 pt-48 px-20'>
+      <div key={0} className='bg-primaryBlue space-y-5 pt-48 px-10 md:px-20'>
       <hr className="border-t-2 border-black my-4" />
         {
           contents.map((content,idx) => {
             return(
-              <>
+              <div key={idx}>
               <Accordion key={idx} title={content.title} content={content.content}/>
               <hr className="border-t-2 border-black my-4" />
-              </>
+              </div>
             )
           })
         }

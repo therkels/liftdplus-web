@@ -4,21 +4,24 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div>
-      <div className="bg-primary w-full pb-3">
-        <div className="text-secondaryText mx-auto text-center space-y-4 w-full max-w-lg pt-4">
-          <p className="font-bold text-4xl">
-            ANSWER. DISCOVER. SAVE.
-          </p>
-          <p className="font-normal text-xl">
-            Help us improve product discovery for cannabis products. Plus, score
-            exclusive discounts!
-          </p>
-          <div className="pt-5">
-            <p className="font-bold text-8xl">UP TO 40% OFF<sup>*</sup></p>
+    <div className=''>
+      <div className="
+            flex flex-col justify-center items-center bg-primaryBlue w-full h-[100vh]">
+          <div className="flex flex-col justify-center items-center text-secondaryText mx-auto text-center space-y-4 w-full pt-4 flex-grow">
+              <p className="font-bold text-2xl md:text-4xl">
+                  ANSWER. DISCOVER. SAVE.
+              </p>
+              <p className="font-normal text-xl">
+                  Help us improve product discovery for cannabis products. Plus, score
+                  exclusive discounts!
+              </p>
+              <div className="pt-5">
+                  <p className="font-bold text-5xl md:text-8xl">UP TO 40% OFF<sup>*</sup></p>
+              </div>
           </div>
-        </div>
-        <p className="text-secondaryText ml-2 mt-4">*pending survey results and recommendations</p>
+          <p className="text-secondaryText mt-auto mr-auto ml-3 mb-3">
+              *pending survey results and recommendations
+          </p>
       </div>
       <div className="bg-white text-secondaryText w-full py-20">
         <div>
@@ -31,7 +34,7 @@ export default function Home() {
             way to discover cannabis
           </p>
           <div className="flex justify-center my-5">
-            <button className="text-white bg-brown p-2 rounded">
+            <button className="text-secondaryText bg-primaryBlue p-2 rounded">
               <Link href="/survey">
               GET STARTED
               </Link>
@@ -39,9 +42,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-lightBrown text-secondaryText w-full py-20">
+      <div className="bg-secondaryBlue text-secondaryText w-full py-20">
         <div>
-        
             <p className="text-6xl pb-4 font-bold text-center">Our Mission</p>
           <div className="mx-8">
             <p className="text-2xl">

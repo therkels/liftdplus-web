@@ -109,32 +109,55 @@ const questionare = [
   }
 ];
 
+interface StepIntroPops {
+  doesConsent: boolean,
+  setDoesConsent: React.Dispatch<React.SetStateAction<boolean>>,
+}
 
-const StepIntro = () => {
-  // Example handler for changing a form value
+const StepIntro: React.FC<StepIntroPops> = ({doesConsent, setDoesConsent}) => {
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setDoesConsent(e.target.checked);
+  };
+
   return (
-    <div className='w-auto m-3 pt-4'>
-      <div className="text-lg font-semibold">
+    <div className="w-auto m-3 pt-4">
+      <div className="md:text-lg font-semibold mb-4">
         <p>Curated Cannabis Recommendations Await</p>
       </div>
       <div>
-        <p>Welcome!<br/><br/></p>
-        <p>
-          We’re here to make choosing cannabis products easy and fun. By answering just a few quick questions, 
-          we’ll suggest products that fit what you like and need. It doesn’t matter if you’ve used cannabis before 
-          or are trying it for the first time – we’re here to help you find the right products for your lifestyle.
-          <br/><br/>
+        <p className="pb-2">Welcome!</p>
+        <p className="pb-5">
+          We’re here to make choosing cannabis products easy and fun. By answering just a few quick
+          questions, we’ll suggest products that fit what you like and need. It doesn’t matter if you’ve used
+          cannabis before or are trying it for the first time – we’re here to help you find the right products
+          for your lifestyle.
         </p>
-        <p>
-        Important Note:<br/>
-        We’re testing our idea right now, so everything you share is private and safe. 
-        Your information will only be used for testing our recommendation tool and will not be shared or sold to anyone, 
-        including dispensaries or partners.
+        <p className="mb-5">
+          <strong>Important Note:</strong><br />
+          We are testing this idea and how well it works. To protect our participants (you), we only ask for an
+          email and first name. This is so we can send you recommendations and confirm your participation :)<br />
+          Your information will only be used in our recommendation tool and will not be shared or sold to
+          anyone, including dispensaries or partners. If you have any questions or concerns, please send us
+          an email at: info@liftdplus.com
         </p>
-        <p>
-        To learn more, visit our website FAQ page or check out the privacy rules we follow for Zoho (our survey) and Squarespace (our website).
-        Ready to get started? Let’s go!
+        <p className="pb-4">
+          By clicking the below button, you are confirming the following:
         </p>
+        <ul className="list-disc mb-4 pl-5">
+          <li>You are 21+ or 18+ (w/medical card) years old</li>
+          <li>You agree to be emailed your recommendations and follow-up survey (you can unsubscribe at any time)</li>
+        </ul>
+        <div className="">
+          <input
+            type="checkbox"
+            id="consentCheckbox"
+            checked={doesConsent}
+            onChange={() => setDoesConsent(!doesConsent)}
+          />
+          <label htmlFor="consentCheckbox" className="ml-2">
+            I consent to the terms and conditions
+          </label>
+        </div>
       </div>
     </div>
   );
@@ -143,45 +166,50 @@ const StepIntro = () => {
 const Step1: React.FC<StepProps> = ({ formData, handleChange }) => {
   // Example handler for changing a form value
   return (
-    <SingleInput 
-    handleChange={handleChange} 
-    formData={formData} 
-    label='email' 
-    labelId='email'
-    field='email'
-    type ='email'
-    required={true}/>
+    <div>
+      <p className='font-bold text-xl p-3 ml-4'>Please enter your email:</p>
+      <SingleInput 
+      handleChange={handleChange} 
+      formData={formData} 
+      label='Email' 
+      labelId='email'
+      field='email'
+      type ='email'
+      required={true}/>
+    </div>
   );
 };
 
 const Step2: React.FC<StepProps> = ({ formData, handleChange }) => {
   return (
-    <div className='
-      w-auto flex flex-col items-center p-4
-      md:flex-row md:justify-left md:space-x-3
-    '>
-      <div className='flex flex-col'>
+    <div>
+      <p className='font-bold text-xl ml-10'>Please enter your first name (last name optional):</p>
+      <div className='
+        w-auto flex flex-col items-center p-4
+        md:flex-row md:justify-left md:space-x-3
+      '>
+        <div className='flex flex-col'>
+          <SingleInput 
+            handleChange={handleChange} 
+            formData={formData} 
+            label='First Name' 
+            labelId='first_name'
+            field='first_name'
+            type='text'
+            required={true}/>
+        </div>
+        <div className='flex flex-col'>
         <SingleInput 
-          handleChange={handleChange} 
-          formData={formData} 
-          label='First Name' 
-          labelId='first_name'
-          field='first_name'
-          type='text'
-          required={true}/>
-      </div>
-      <div className='flex flex-col'>
-      <SingleInput 
-          handleChange={handleChange} 
-          formData={formData} 
-          label='Last Name' 
-          labelId='last_name'
-          field='last_name'
-          type='text'
-          required={false}/>
+            handleChange={handleChange} 
+            formData={formData} 
+            label='Last Name' 
+            labelId='last_name'
+            field='last_name'
+            type='text'
+            required={false}/>
+        </div>
       </div>
     </div>
-
   );
 };
 
@@ -226,6 +254,7 @@ const MultiStepForm: React.FC = () => {
     flavor_preference: []
   });
   const [err, setErr] = useState<string>("");
+  const [doesConsent, setDoesConsent] = useState<boolean>(false);
 
   const handleChange =(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const {name, value} = e.target;
@@ -240,6 +269,9 @@ const MultiStepForm: React.FC = () => {
   const validateInput = (): boolean => {
     let currErr: string = "";
     //check email
+    if (step == 0 && !doesConsent){
+      currErr = 'Consent required for this survey';
+    }
     if (step === 1) {
       const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[cC][oO][mM]$/;
       if(!regex.test(formData.email)) {
@@ -314,7 +346,7 @@ const MultiStepForm: React.FC = () => {
   };
 
   const steps = [
-    <StepIntro key="s0"/>,
+    <StepIntro key="s0" doesConsent={doesConsent} setDoesConsent={setDoesConsent} validateInput={validateInput}/>,
     <Step1 key="s1" formData={formData} handleChange={handleChange} />,
     <Step2 key="s2" formData={formData} handleChange={handleChange} />,
   ];
@@ -336,11 +368,11 @@ const MultiStepForm: React.FC = () => {
       {steps.length !== step?
       <>
         <div className='text-right p-3'>
-        <p>Step {step} of {steps.length}</p>
+        <p>Step {step} of {steps.length-1}</p>
       </div>
       {steps[step]}
       {err ? <p className='text-red-500 pl-7'>{err}</p> : <></>}
-      <div className='flex justify-center'>
+      <div className='flex justify-center pb-10'>
         {step > 0 && (
           <button
             className="text-white text-lg px-4 py-2 m-3 min-w-32 bg-rose-500 button-size"
@@ -371,7 +403,7 @@ const MultiStepForm: React.FC = () => {
       <div className='flex justify-center'>
         <Link 
         href="/" 
-        className="inline-block px-4 py-2 m-3 font-bold text-white bg-rose-500"
+        className="inline-block px-4 py-2 m-3 min-w-32 font-bold text-white bg-rose-500"
         >
           Return Home
         </Link>
