@@ -254,12 +254,10 @@ const MultiStepForm: React.FC = () => {
 
   const handleChange =(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const {name, value} = e.target;
-      console.log(name, value)
       setFormData((prevData) => ({
           ...prevData,
           [name]: value
       }));
-      console.log(formData)
   };
 
   const validateInput = (): boolean => {
@@ -336,7 +334,6 @@ const MultiStepForm: React.FC = () => {
       catch (e){
         console.error('Error:', e)
       }
-      console.log('here')
       nextStep();
     }
   };
