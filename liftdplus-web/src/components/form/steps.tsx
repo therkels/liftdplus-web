@@ -115,10 +115,6 @@ interface StepIntroPops {
 }
 
 const StepIntro: React.FC<StepIntroPops> = ({doesConsent, setDoesConsent}) => {
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDoesConsent(e.target.checked);
-  };
-
   return (
     <div className="w-auto m-3 pt-4">
       <div className="md:text-lg font-semibold mb-4">
@@ -346,7 +342,7 @@ const MultiStepForm: React.FC = () => {
   };
 
   const steps = [
-    <StepIntro key="s0" doesConsent={doesConsent} setDoesConsent={setDoesConsent} validateInput={validateInput}/>,
+    <StepIntro key="s0" doesConsent={doesConsent} setDoesConsent={setDoesConsent}/>,
     <Step1 key="s1" formData={formData} handleChange={handleChange} />,
     <Step2 key="s2" formData={formData} handleChange={handleChange} />,
   ];
