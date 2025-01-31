@@ -8,6 +8,7 @@ export default function Home() {
         text-secondaryText
         pt-20
         px-5
+        pb-5
         md:h-screen
         ">
             <MultiStepForm></MultiStepForm>
