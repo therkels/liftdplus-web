@@ -28,7 +28,7 @@ const questionare = [
     ]
   },
   {
-    id: 'sensativity',
+    id: 'sensitivity',
     question: "How often do you consume cannabis, and how sensitive are you to its effects?",
     type:'radio',
     answers: [
