@@ -292,7 +292,6 @@ const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
     return currErr!=="";
   }
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(getFormattedDate());
     if (event.target.type === "checkbox") {
        setFormData((prevData) =>{
         const oldArr = prevData[event.target.id];
@@ -336,6 +335,7 @@ const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
             'Content-Type': 'application/json'
           },
         });
+        console.log(formData)
         nextStep();
       }
       catch (e){
