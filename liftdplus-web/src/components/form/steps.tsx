@@ -4,7 +4,7 @@ import axios from 'axios';
 import MultiFormItem from './multiFormItem';
 import {StepProps, StepQuestionProps, FormData} from './types';
 import SingleInput from './singleInput';
-
+import getFormattedDate from '@/utils/date';
 const questionare = [
   {
     id: 'potency_preference',
@@ -233,9 +233,10 @@ const StepOutro = () => {
   );
 };
 
-const MultiStepForm: React.FC = () => {
+const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
   const [step, setStep] = useState<number>(0);
   const [formData, setFormData] = useState<FormData>({
+    source: sc,
     email: '',
     first_name: '',
     last_name: '',
@@ -247,7 +248,8 @@ const MultiStepForm: React.FC = () => {
     usage_reason: [],
     usage_time: [],
     effect_avoid: [],
-    flavor_preference: []
+    flavor_preference: [],
+    recieved_at: '',
   });
   const [err, setErr] = useState<string>("");
   const [doesConsent, setDoesConsent] = useState<boolean>(false);
@@ -290,6 +292,7 @@ const MultiStepForm: React.FC = () => {
     return currErr!=="";
   }
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(getFormattedDate());
     if (event.target.type === "checkbox") {
        setFormData((prevData) =>{
         const oldArr = prevData[event.target.id];
@@ -324,6 +327,10 @@ const MultiStepForm: React.FC = () => {
     if (!err) {
       try{
         //post
+        setFormData(prevData => ({
+          ...prevData,
+          recieved_at: getFormattedDate()
+        }))
         await axios.post('https://therkels.pythonanywhere.com/survey/submit', formData, {
           headers: {
             'Content-Type': 'application/json'

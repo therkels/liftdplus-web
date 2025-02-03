@@ -1,7 +1,11 @@
 "use client";
 import MultiStepForm from '@/components/form/steps';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-export default function Home() {
+function Form() {
+    const sc_res = useSearchParams().get('sc');
+    const sc:string = sc_res? sc_res: '';
     return (
         <div className="
         bg-primaryBlue
@@ -11,7 +15,15 @@ export default function Home() {
         pb-5
         md:h-screen
         ">
-            <MultiStepForm></MultiStepForm>
+            <MultiStepForm sc={sc}></MultiStepForm>
         </div>
+    )
+}
+
+export default function Home() {
+    return (
+        <Suspense>
+            <Form/>
+        </Suspense>
     )
   }

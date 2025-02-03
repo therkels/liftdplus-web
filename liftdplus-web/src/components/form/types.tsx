@@ -1,5 +1,6 @@
 export interface FormData {
   [key: string]: string | string[],
+  source: string,
   email: string,
   first_name:string,
   last_name:string,
@@ -11,7 +12,8 @@ export interface FormData {
   usage_reason: string[],
   usage_time: string[],
   effect_avoid: string[],
-  flavor_preference: string[]
+  flavor_preference: string[],
+  recieved_at: string
 };
 
 export interface QuestionItem {
