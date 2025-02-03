@@ -3,6 +3,7 @@ import MultiStepForm from '@/components/form/steps';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
+//put this in own component so it can be wrapped in suspense
 function Form() {
     const sc_res = useSearchParams().get('sc');
     const sc:string = sc_res? sc_res: '';
