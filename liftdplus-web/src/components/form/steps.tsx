@@ -123,25 +123,30 @@ const StepIntro: React.FC<StepIntroPops> = ({doesConsent, setDoesConsent}) => {
       <div>
         <p className="pb-2">Welcome!</p>
         <p className="pb-5">
-          We’re here to make choosing cannabis products easy and fun. By answering just a few quick
-          questions, we’ll suggest products that fit what you like and need. It doesn’t matter if you’ve used
-          cannabis before or are trying it for the first time – we’re here to help you find the right products
-          for your lifestyle.
+        Thank you for taking the time to participate in our survey! Our team is dedicated 
+        to making cannabis product discovery simple and personalized. 
+        By answering just a few quick questions, we&apos;ll suggest products 
+        that fit your preferences and needs. Whether you&apos;re a first-time user or experienced, 
+        we&apos;re here to help you find the right products for your lifestyle.
         </p>
         <p className="mb-5">
           <strong>Important Note:</strong><br />
-          We are testing this idea and how well it works. To protect our participants (you), we only ask for an
-          email and first name. This is so we can send you recommendations and confirm your participation :)<br />
-          Your information will only be used in our recommendation tool and will not be shared or sold to
-          anyone, including dispensaries or partners. If you have any questions or concerns, please send us
-          an email at: info@liftdplus.com
+          We are in the early stages of developing our product recommendation process. 
+          This survey helps us learn and improve how we suggest products based on your preferences. 
+          Your information is private, secure, and will be used solely to enhance our recommendation system. 
+          We will never share or sell your data to anyone, including dispensaries or partners. 
+          For more details, please review our <Link className="underline" href="/privacy">Privacy Policy</Link>.
+          <br/><b>As a reminder, we are not selling any products or services. This is a free, experimental tool.</b>
         </p>
         <p className="pb-4">
-          By clicking the below button, you are confirming the following:
+          Confirmation Notice: By clicking the button below, you confirm that:
         </p>
         <ul className="list-disc mb-4 pl-5">
-          <li>You are 21+ or 18+ (w/medical card) years old</li>
-          <li>You agree to be emailed your recommendations and follow-up survey (you can unsubscribe at any time)</li>
+          <li>You are 21 years of age or older, or 18+ with a valid medical card.</li>
+          <li>You are participating in a state/region where cannabis sales and consumption is legal.</li>
+          <li>You agree to receive emails from LIFTD+ related to your participation, including product recommendations, 
+            reminders, post-experience surveys, and future opportunities to try out new services. 
+            <b>You can unsubscribe at any time.</b></li>
         </ul>
         <div className="">
           <input
@@ -222,19 +227,34 @@ const StepQuestion: React.FC<StepQuestionProps> = ({ questionItem, formData, han
   );
 };
 
-const StepOutro = () => {
+const StepOutro = ({hasError}: {hasError: boolean }) => {
   // Example handler for changing a form value
   return (
+    <>
+    {hasError ? 
     <div className='w-auto m-3 pt-4'>
       <p>
-        Thank you for participating in our survey! What’s next? Within 2 days, you’ll receive your personalized recommendations via email. Keep an eye out for an email from info@cannabizstart-up.com, and don’t forget to check your spam folder just in case!
+        Thank you for sharing your preferences! 
+        We’re using your answers to recommend products tailored just for you. 
+        You’ll receive your personalized recommendations from info@liftdplus.com shortly.<br/>
+
+        Please be sure to check your spam or junk folders if you don’t see the email in your inbox within the next 48-72 hours.
       </p>
     </div>
+    : 
+    <div className='w-auto m-3 pt-4'>
+      <p>We apologize for the inconvenience, but it appears something went wrong with your submission :(
+      <br/>Please try again shortly.
+      If the issue persists, please reach out to info@liftdplus.com.
+      </p>  
+    </div>}
+    </>
   );
 };
 
 const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
   const [step, setStep] = useState<number>(0);
+  const [didSubmit, setDidSubmit] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     source: sc,
     email: '',
@@ -336,6 +356,7 @@ const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
           },
         });
         console.log(formData)
+        setDidSubmit(true);
         nextStep();
       }
       catch (e){
@@ -399,7 +420,7 @@ const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
       </div>
       </>:
       <>
-      <StepOutro/>
+      <StepOutro hasError={didSubmit}/>
       <div className='flex justify-center'>
         <Link 
         href="/" 

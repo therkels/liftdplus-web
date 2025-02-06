@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function NavBar() {
   return (
     <nav className="bg-white p-4 fixed top-0 left-0 right-0">
-      <ul className="flex">
+      <ul className="flex items-center">
         <li>
           <Link href="/" className="text-primaryText">
           <Image
