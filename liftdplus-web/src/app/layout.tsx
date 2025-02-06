@@ -1,5 +1,6 @@
 import NavBar from "@/components/nav";
 import Head from 'next/head';
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -61,6 +62,13 @@ export default function RootLayout({
 
         <NavBar/>
         {children}
+        <footer>
+        <div className="flex justify-center text-black py-5">
+          <Link href="/privacy">
+            Privacy Policy
+          </Link>
+        </div>
+      </footer>
       </body>
     </html>
   );
