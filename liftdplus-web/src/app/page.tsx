@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <div className=''>
       <div className="
-            flex flex-col justify-center items-center bg-primaryBlue w-full h-[100vh]">
-          <div className="flex flex-col justify-center items-center text-secondaryText mx-auto text-center space-y-4 w-full pt-4 flex-grow">
+            flex flex-col justify-center items-center bg-primaryBlue w-full min-h-[100vh] py-20">
+          <div className="flex flex-col justify-center items-center text-secondaryText mx-auto text-center space-y-4 w-fullflex-grow">
           <Image
             src="/logo_black.svg"
             width={500}
