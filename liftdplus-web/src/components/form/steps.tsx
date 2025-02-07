@@ -2,112 +2,12 @@ import React, { useState, ChangeEvent} from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import MultiFormItem from './multiFormItem';
-import {StepProps, StepQuestionProps, FormData} from './types';
+import {StepProps, StepQuestionProps, FormData, Questionnaire} from './types';
 import SingleInput from './singleInput';
 import getFormattedDate from '@/utils/date';
-const questionare = [
-  {
-    id: 'potency_preference',
-    type:'radio',
-    question: "Do you prefer a specific dosage or potency range?",
-    answers: [
-      "Low THC (1-10%): Gentle effects, good for beginners (e.g., low-dose gummies, CBD flower)",
-      "Moderate THC (11-20%): Balanced effects (e.g., regular flower, moderate edibles)",
-      "High THC (21%+): Strong effects for experienced users (e.g., high-potency flower, concentrates)",
-      "Not Sure/Open to Recommendations"
-    ]
-  },
-  {
-    id: 'experience',
-    question: "How Would You Describe Your Experience with Cannabis?",
-    type:'radio',
-    answers: [
-      "Novice User: I have little to no experience with cannabis (tried it once or twice, or never)",
-      "Occasional User: I use cannabis occasionally, about 1-4 times per month",
-      "Frequent User: I use cannabis regularly, 5 or more times per week"
-    ]
-  },
-  {
-    id: 'sensitivity',
-    question: "How often do you consume cannabis, and how sensitive are you to its effects?",
-    type:'radio',
-    answers: [
-      "I rarely consume and have no to low tolerance",
-      "I consume occasionally and have low to moderate tolerance",
-      "I consume frequently and have high tolerance",
-      "I am unsure of my tolerance level"
-    ]
-  },
-  {
-    id: 'consumption_preference',
-    question: "Do you have a preference for how you consume cannabis? (Select all that apply) ",
-    type:'checkbox',
-    answers: [
-      "Flower",
-      "Vape/Cartridge",
-      "Edible",
-      "Topical",
-      "Tincture",
-      "Not Sure/Open to Recommendations"
-    ]
-  },
-  {
-    id: 'effect_speed',
-    question: "Do you want something that works quickly, like a vape, or something that takes longer to work, like a gummy or cookie?",
-    type:'radio',
-    answers: [
-      "Fast Acting",
-      "Works Slowly but Lasts Longer",
-      "No preference"
-    ]
-  },
-  {
-    id: 'usage_reason',
-    question: "What are your primary reasons for using cannabis? (Select all that apply)",
-    type:'checkbox',
-    answers: [
-      "relaxation",
-      "Focus",
-      "Pain Relief",
-      "Stress Relief",
-      "Sleep",
-      "Recreation",
-      "Socialization"
-    ]
-  },    
-  {
-    id: 'usage_time',
-    question: "When do you typically consume cannabis? (Select all that apply)",
-    type:'checkbox',
-    answers: [
-      "Morning",
-      "Afternoon",
-      "Evening",
-      "Before Bed"
-    ]
-  },
-  {
-    id: 'effect_avoid',
-    question: "Are there specific things you want to avoid in your cannabis experience? (select all that apply)",
-    type:'checkbox',
-    answers: [
-      "Feeling too high",
-      "Lingering effects",
-      "Noticeable scent"
-    ]
-  },
-  {
-    id: 'flavor_preference',
-    question: "Do you have a preference for certain flavors or aromas? (Select all that apply)",
-    type:'checkbox',
-    answers: [
-      "Fruity (e.g., citrus, berry)",
-      "Herbal (e.g., minty, pine)",
-      "Earthy (e.g., woody, natural)",
-      "Sweet (e.g., candy-like, dessert)"
-    ]
-  }
-];
+import questionnaireData from '../../../public/data/survey_questions.json';
+
+const questionnaire: Questionnaire = questionnaireData;
 
 interface StepIntroPops {
   doesConsent: boolean,
@@ -252,12 +152,13 @@ const StepOutro = ({hasError}: {hasError: boolean }) => {
   );
 };
 
-const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
+const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
   const [step, setStep] = useState<number>(0);
   const [didSubmit, setDidSubmit] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     source: sc,
     email: '',
+    recieved_at: '',
     first_name: '',
     last_name: '',
     potency_preference: '',
@@ -269,7 +170,10 @@ const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
     usage_time: [],
     effect_avoid: [],
     flavor_preference: [],
-    recieved_at: '',
+    received_at: '',
+    usage_goals: [],
+    cbd_focus: '',
+    budget: ''
   });
   const [err, setErr] = useState<string>("");
   const [doesConsent, setDoesConsent] = useState<boolean>(false);
@@ -300,7 +204,7 @@ const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
       }
     }
     if (step >= 3) {
-      const question = questionare[step - 3];
+      const question = questionnaire[step - 3];
       if (question.type === 'radio' && !formData[question.id]) {
         currErr =`Please select an option`;
       }
@@ -371,7 +275,7 @@ const MultiStepForm: React.FC<{sc:string;}> = ({sc}) => {
     <Step1 key="s1" formData={formData} handleChange={handleChange} />,
     <Step2 key="s2" formData={formData} handleChange={handleChange} />,
   ];
-  questionare.map((item,idx) => steps.push(<StepQuestion key={idx} questionItem={item} formData={formData} handleChange={handleOptionChange}/>))
+  questionnaire.map((item,idx) => steps.push(<StepQuestion key={idx} questionItem={item} formData={formData} handleChange={handleOptionChange}/>))
 
   const nextStep = () =>  {
     const err = validateInput();

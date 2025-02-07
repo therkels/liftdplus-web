@@ -1,0 +1,138 @@
+[
+  {
+    "id": "usage_reason",
+    "type": "checkbox",
+    "question": "What are your primary reasons for considering or using cannabis?(Select all that apply)",
+    "answers": [
+      "Relaxation (general calming effects)",
+      "Focus",
+      "Pain Relief",
+      "Stress Relief (targeting mental tension or anxiety)",
+      "Sleep",
+      "Recreation",
+      "Socialization",
+      "I'm just exploring",
+      "General wellness (e.g., stress management, relaxation, recovery"
+    ]
+  },
+  {
+    "id": "usage_goals",
+    "type": "checkbox",
+    "question": "Are you hoping to use cannabis to support any specific health or wellness goals? Optional and confidential. (Select all that apply)                                                                                                                                                                ",
+    "answers": [
+      "Managing Stress or Feeling More Relaxed",
+      "Improving Sleep or Easing Restlessness",
+      "Relieving Pain or Discomfort",
+      "Boosting Mood or Feeling More Uplifted",
+      "Supporting Focus or Mental Clarity",
+      "Increasing Appetite or Easing Nausea",
+      "Supporting Wellness Without Intoxicating Effects (CBD-focused)",
+      "I'm Not Using It for Health Reasons -Just Curious or Recreational"
+    ]
+  },
+  {
+    "id": "experience",
+    "type": "radio",
+    "question": "How Would You Describe Your Experience with Cannabis?",
+    "answers": [
+      "New to Cannabis: I have little to no experience (I've never tried it or only tried it once or twice)",
+      "Occasional User: I use cannabis occasionally, about 1-4 times per month",
+      "Regular User: I use cannabis regularly, 1-4 times per week",
+      "Frequent User: I use cannabis frequently, 5 or more times per week"
+    ]
+  },
+  {
+    "id": "consumption_preference",
+    "type": "checkbox",
+    "question": "How would you prefer to consume cannabis? (Select all that apply)\n(If you're new to cannabis, think about which option sounds the most comfortable or enjoyable to you.)",
+    "answers": [
+      "Smokable (Flower): Dried cannabis that's smoked in a joint, pipe, or bong",
+      "Vape (Cartridge or Pen): Cannabis oil that's inhaled using a vape device",
+      "Edibles: Cannabis-infused foods or drinks, like gummies, chocolates, or cookies",
+      "Topicals: Creams, lotions, or balms applied to the skin for targeted relief",
+      "Liquid Drops (Tinctures): Cannabis extracts taken under the tongue or added to drinks",
+      "Open to Recommendations: I'm open to trying different answers"
+    ]
+  },
+  {
+    "id": "effect_speed",
+    "type": "radio",
+    "question": "Would you prefer a cannabis product that you feel quickly, or one that takes longer to kick in but lasts longer?",
+    "answers": [
+      "Fast-Acting, Shorter Duration: I prefer something that works quickly (within 5-15 minutes) and lasts 1-2 hours, like a vape or liquid drop",
+      "Slow-Acting, Long-Lasting: I prefer something that takes longer to work (30 minutes to 2 hours) but lasts 4-6 hours, like a gummy or edible",
+      "Fast-Acting, Long-Lasting: I'd like quick effects (within 5-15 minutes) that also last a while (2-4 hours)",
+      "No Preference: I'm open to exploring different answers"
+    ]
+  },
+  {
+    "id": "potency_preference",
+    "type": "radio",
+    "question": "Do you have a preference for the strength (potency) of cannabis you'd like to use?\n(If you're new to cannabis, think about whether you'd prefer gentle, balanced, or stronger effects.)",
+    "answers": [
+      "Low THC (1-10%): Gentle, mild effects-great for beginners (e.g., low-dose gummies, CBD-rich flower)",
+      "Moderate THC (11-20%): Balanced effects-suitable for most users, offering a mix of relaxation and mild euphoria (e.g., regular flower, moderate edibles)",
+      "High THC (21%+): Strong, intense effects—best for experienced users seeking potent results (e.g., high-potency flower, concentrates)",
+      "I'm Open to Exploring: I'm not sure yet, but I'm open to recommendations based on the experience I'm looking for"
+    ]
+  },
+  {
+    "id": "flavor_preference",
+    "type": "checkbox",
+    "question": "Do you have a preference for certain flavors or aromas in cannabis? (Select all that apply)\n(If you're new to cannabis, think about the types of flavors or scents you generally enjoy.)",
+    "answers": [
+      "Fruity: Bright and refreshing, like citrus, berry, or tropical fruits",
+      "Herbal: Fresh and clean, with notes like mint, pine, or eucalyptus",
+      "Earthy: Rich and natural, with woody, musky, or plant-like scents",
+      "Sweet: Dessert-like, with candy, vanilla, or sugary notes",
+      "No Preference: I'm open to exploring different flavors and aromas"
+    ]
+  },
+  {
+    "id": "usage_time",
+    "type": "checkbox",
+    "question": "When do you typically consume cannabis, or when do you think you'd prefer to? (Select all that apply)",
+    "answers": [
+      "Morning: To start the day with focus, energy, or for specific needs",
+      "Afternoon: During the day to stay balanced, relaxed, or productive",
+      "Evening: To unwind, relax, or enjoy social activities",
+      "Before Bed: To help with sleep or nighttime relaxation",
+      "When I Want to Relax or Feel Good: Anytime I'm looking to relax, focus, or enjoy an activity"
+    ]
+  },
+  {
+    "id": "effect_avoid",
+    "type": "checkbox",
+    "question": "Are there any effects or experiences you'd like to avoid when using cannabis? (Select all that apply)\n(If you're new to cannabis, think about things you might feel uncomfortable with or experiences you'd prefer to avoid.)",
+    "answers": [
+      "Feeling Too High: I want to avoid feeling overwhelmed or out of control",
+      "Feeling Anxious or Uneasy: I prefer to avoid experiences that might make me feel nervous or unsettled",
+      "Drowsiness: I prefer to stay alert and avoid feeling too sleepy",
+      "Lack of Focus: I want to avoid feeling mentally foggy or distracted",
+      "Strong Body Sensations: I'm not comfortable with intense physical effects",
+      "I prefer products without intoxicating effects",
+      "No Specific Concerns: I don't have anything specific I want to avoid"
+    ]
+  },
+  {
+    "id": "cbd_focus",
+    "type": "radio",
+    "question": "Would you like us to prioritize CBD-focused products in your recommendations?",
+    "answers": [
+      "Yes, I prefer products with little to no THC",
+      "No, I'm open to products with THC",
+      "I'm open to both THC and CBD products"
+    ]
+  },
+  {
+    "id": "budget",
+    "type": "radio",
+    "question": "Do you have a budget preference when purchasing cannabis products?(Optional, but helps us recommend products that fit your price range.)",
+    "answers": [
+      "Budget-Friendly: I prefer cost-effective answers that offer good value",
+      "Mid-Range: I'm looking for a balance between quality and affordability",
+      "Premium: I'm open to higher-priced products for premium quality and unique features",
+      "No Preference: I'm flexible and open to all price ranges"
+    ]
+  }
+]

@@ -22,7 +22,7 @@ const MultiFormItem = ({
     <div key={id}>
       <p className='text-xl mb-2 p-3'>{question}</p>
       {answers.map((option, index) => (
-        <div className="py-2"
+        <div className="py-2 px-3"
         key={`${id}-${index}`}>
           <label className='m-2'>
             <input

@@ -11,7 +11,7 @@ function Form() {
         <div className="
         bg-primaryBlue
         text-secondaryText
-        pt-20
+        pt-28
         px-5
         pb-5
         md:h-screen
