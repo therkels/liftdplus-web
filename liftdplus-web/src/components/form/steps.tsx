@@ -256,7 +256,7 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
             'Content-Type': 'application/json'
           },
         });
-        console.log(formData)
+        // console.log(formData)
         setDidSubmit(true);
         nextStep();
       }
