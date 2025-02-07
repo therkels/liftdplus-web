@@ -6,14 +6,12 @@ export interface FormData {
   last_name: string;
   potency_preference: string;
   experience: string;
-  sensitivity: string[];
   consumption_preference: string[];
   effect_speed: string;
   usage_reason: string[];
   usage_time: string[];
   effect_avoid: string[];
   flavor_preference: string[];
-  received_at: string;
   usage_goals: string[];
   cbd_focus: string;
   budget: string;

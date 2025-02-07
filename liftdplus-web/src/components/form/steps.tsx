@@ -4,7 +4,6 @@ import axios from 'axios';
 import MultiFormItem from './multiFormItem';
 import {StepProps, StepQuestionProps, FormData, Questionnaire} from './types';
 import SingleInput from './singleInput';
-import getFormattedDate from '@/utils/date';
 import questionnaireData from '../../../public/data/survey_questions.json';
 
 const questionnaire: Questionnaire = questionnaireData;
@@ -158,12 +157,10 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
   const [formData, setFormData] = useState<FormData>({
     source: sc,
     email: '',
-    recieved_at: '',
     first_name: '',
     last_name: '',
     potency_preference: '',
     experience: '',
-    sensitivity: [],
     consumption_preference: [],
     effect_speed: '',
     usage_reason: [],
@@ -250,10 +247,10 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
     if (!err) {
       try{
         //post
-        setFormData(prevData => ({
-          ...prevData,
-          recieved_at: getFormattedDate()
-        }))
+        // setFormData(prevData => ({
+        //   ...prevData,
+        //   recieved_at: getFormattedDate()
+        // }))
         await axios.post('https://therkels.pythonanywhere.com/survey/submit', formData, {
           headers: {
             'Content-Type': 'application/json'
