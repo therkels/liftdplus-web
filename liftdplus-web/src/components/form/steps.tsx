@@ -192,7 +192,11 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
       }
       else{
         try{
-          await axios.post('https://therkels.pythonanywhere.com/survey/consent');
+          await axios.post('https://therkels.pythonanywhere.com/survey/submit', formData, {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          });
         }
         catch{
           currErr = 'Error connecting with service, please try again. If issue continues, contact info@liftdplus.com';
