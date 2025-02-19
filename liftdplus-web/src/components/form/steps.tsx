@@ -194,7 +194,7 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
         try{
           await axios.post('https://therkels.pythonanywhere.com/survey/consent');
         }
-        catch (e){
+        catch{
           currErr = 'Error connecting with service, please try again. If issue continues, contact info@liftdplus.com';
         }
       }
