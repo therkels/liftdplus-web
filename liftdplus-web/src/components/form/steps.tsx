@@ -192,7 +192,7 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
       }
       else{
         try{
-          await axios.post('https://therkels.pythonanywhere.com/survey/submit', formData, {
+          await axios.post('https://therkels.pythonanywhere.com/survey/consent', {}, {
             headers: {
               'Content-Type': 'application/json'
             },
