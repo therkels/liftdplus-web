@@ -288,8 +288,8 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
   ];
   questionnaire.map((item,idx) => steps.push(<StepQuestion key={idx} questionItem={item} formData={formData} handleChange={handleOptionChange}/>))
 
-  const nextStep = () =>  {
-    const err = validateInput();
+  const nextStep = async() =>  {
+    const err = await validateInput();
     if (!err) {
       setStep((prev) => Math.min(prev + 1, steps.length));
     }
