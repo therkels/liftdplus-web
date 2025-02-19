@@ -183,11 +183,21 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
       }));
   };
 
-  const validateInput = (): boolean => {
+  const validateInput = async(): Promise<boolean> => {
     let currErr: string = "";
     //check email
-    if (step == 0 && !doesConsent){
-      currErr = 'Consent required for this survey';
+    if (step == 0){
+      if (!doesConsent){
+        currErr = 'Consent required for this survey';
+      }
+      else{
+        try{
+          await axios.post('https://therkels.pythonanywhere.com/survey/consent');
+        }
+        catch (e){
+          currErr = 'Error connecting with service, please try again. If issue continues, contact info@liftdplus.com';
+        }
+      }
     }
     if (step === 1) {
       const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[cC][oO][mM]$/;
@@ -244,6 +254,7 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
 
   const handleSubmit = async() => {
     const err = validateInput();
+    console.log(formData)
     if (!err) {
       try{
         //post
@@ -256,7 +267,6 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
             'Content-Type': 'application/json'
           },
         });
-        // console.log(formData)
         setDidSubmit(true);
         nextStep();
       }
