@@ -273,6 +273,7 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
         });
         setDidSubmit(true);
         nextStep();
+        console.log("made it")
       }
       catch (e){
         console.error('Error:', e)
