@@ -190,18 +190,18 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
       if (!doesConsent){
         currErr = 'Consent required for this survey';
       }
-      // else{
-      //   try{
-      //     await axios.post('https://therkels.pythonanywhere.com/survey/consent', {}, {
-      //       headers: {
-      //         'Content-Type': 'application/json'
-      //       },
-      //     });
-      //   }
-      //   catch{
-      //     currErr = 'Error connecting with service, please try again. If issue continues, contact info@liftdplus.com';
-      //   }
-      // }
+      else{
+        try{
+          await axios.post('https://therkels.pythonanywhere.com/survey/consent', {}, {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          });
+        }
+        catch{
+          currErr = 'Error connecting with service, please try again. If issue continues, contact info@liftdplus.com';
+        }
+      }
     }
     if (step === 1) {
       const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[cC][oO][mM]$/;
@@ -257,8 +257,7 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
   };
 
   const handleSubmit = async() => {
-    const err = validateInput();
-    console.log(formData)
+    const err = await validateInput();
     if (!err) {
       try{
         //post
@@ -266,6 +265,7 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
         //   ...prevData,
         //   recieved_at: getFormattedDate()
         // }))
+        console.log('here')
         await axios.post('https://therkels.pythonanywhere.com/survey/submit', formData, {
           headers: {
             'Content-Type': 'application/json'
