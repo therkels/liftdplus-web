@@ -260,12 +260,6 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
     const err = await validateInput();
     if (!err) {
       try{
-        //post
-        // setFormData(prevData => ({
-        //   ...prevData,
-        //   recieved_at: getFormattedDate()
-        // }))
-        console.log('here')
         await axios.post('https://therkels.pythonanywhere.com/survey/submit', formData, {
           headers: {
             'Content-Type': 'application/json'
@@ -273,7 +267,6 @@ const MultiStepForm: React.FC<{sc:string; }> = ({sc}) => {
         });
         setDidSubmit(true);
         nextStep();
-        console.log("made it")
       }
       catch (e){
         console.error('Error:', e)
