@@ -1,9 +1,16 @@
+"use client";
+
 import Image from "next/image";
+import HomeComponent from "@/components/Home";
+import ProfileExample from "@/components/ProfileExample";
 
 export default function Home() {
   return (
-    <div className="size-full flex flex-col gap-8 items-center justify-center">
-      home
+    <div>
+          <HomeComponent />
+          <a href="/auth/login">LOGIN</a>
+          <a href="/auth/logout">Logout</a>
+          <ProfileExample />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Home = () => {
+const HomeComponent = () => {
     return (
         <div className="size-full flex flex-col gap-8 items-center justify-center">
         home
@@ -8,4 +8,4 @@ const Home = () => {
     );
     };
 
-export default Home;
+export default HomeComponent;
